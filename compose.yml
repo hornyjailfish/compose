@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nodered:
+    image: nodered/node-red
+    volumes:
+      - ./nodered_data:/data
+    ports:
+      - 1880:1880
+    
+  deno:
+    image: denoland/deno
+    command: run --watch --allow-net --allow-read /app/index.ts
+    volumes:
+      - ./src/index.ts:/app/index.ts
+      - ./src/index.html:/src/index.html
+    ports: 
+      - 8000:8000
